@@ -73,7 +73,7 @@ const handleAddToDatabase = async () => {
     alert("❌ Server error.");
   }
 };
-
+console.log("Backend URL:", BACKEND_URL);
 
   return (
     <div className="homepage">
@@ -209,5 +209,6 @@ const handleAddToDatabase = async () => {
     </div>
   );
 };
+
 
 export default ModelPage;
