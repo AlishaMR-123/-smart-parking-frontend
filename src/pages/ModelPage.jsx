@@ -63,7 +63,9 @@ const handleAddToDatabase = async () => {
       method: "POST",
       body: formData,
     });
+    
     const result = await response.json();
+    console.log("Backend URL:", BACKEND_URL);
 
     if (result.success) {
       alert(`✅ Data added to database! Vehicle count: ${result.count}`);
