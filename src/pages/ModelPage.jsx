@@ -182,12 +182,13 @@ const ModelPage = () => {
               * Upload the same image to test the model out before adding to database
             </p>
             <iframe
-              src={`https://1e2d3ba3ec199f67e1.gradio.live?model=${selectedModel}`} // 👈 dynamic model
+              src={`https://alishaaa199-yolo-vehicle-detection.hf.space?model=${selectedModel}`} // 👈 dynamic model
               title="YOLO Gradio Interface"
               width="100%"
               height="650"
               style={{ border: 'none', borderRadius: '12px' }}
             />
+            
             <div className="text-center mt-4">
               {!gradioConfirmed ? (
                 <button onClick={() => setGradioConfirmed(true)} className="btn model-action-btn">
