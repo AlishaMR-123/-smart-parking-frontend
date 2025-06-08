@@ -44,34 +44,36 @@ const ModelPage = () => {
     setSelectedImageFile(e.target.files[0]);
   };
 
-  const handleAddToDatabase = async () => {
-    if (!selectedImageFile) return alert("Please upload an image.");
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
-    const formData = new FormData();
-    formData.append("image", selectedImageFile);
-    formData.append("location", location);
-    formData.append("date", date);
-    formData.append("time", time);
-    formData.append("model", selectedModel);
+const handleAddToDatabase = async () => {
+  if (!selectedImageFile) return alert("Please upload an image.");
 
+  const formData = new FormData();
+  formData.append("image", selectedImageFile);
+  formData.append("location", location);
+  formData.append("date", date);
+  formData.append("time", time);
+  formData.append("model", selectedModel);
 
-    try {
-      const response = await fetch("http://localhost:5000/predict", {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
+  try {
+    const response = await fetch(`${BACKEND_URL}/predict`, {
+      method: "POST",
+      body: formData,
+    });
+    const result = await response.json();
 
-      if (result.success) {
-        alert(`✅ Data added to database! Vehicle count: ${result.count}`);
-      } else {
-        alert("❌ Prediction failed.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("❌ Server error.");
+    if (result.success) {
+      alert(`✅ Data added to database! Vehicle count: ${result.count}`);
+    } else {
+      alert("❌ Prediction failed.");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("❌ Server error.");
+  }
+};
+
 
   return (
     <div className="homepage">
