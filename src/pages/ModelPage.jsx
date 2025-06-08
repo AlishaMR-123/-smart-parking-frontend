@@ -45,6 +45,8 @@ const ModelPage = () => {
   };
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+  
+console.log("Backend URL:", BACKEND_URL);
 
 const handleAddToDatabase = async () => {
   if (!selectedImageFile) return alert("Please upload an image.");
@@ -73,7 +75,6 @@ const handleAddToDatabase = async () => {
     alert("❌ Server error.");
   }
 };
-console.log("Backend URL:", BACKEND_URL);
 
   return (
     <div className="homepage">
