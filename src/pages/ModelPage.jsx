@@ -44,9 +44,7 @@ const ModelPage = () => {
     setSelectedImageFile(e.target.files[0]);
   };
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
-  
-console.log("Backend URL:", BACKEND_URL);
+const BACKEND_URL = "https://smart-parking-backen-6x0c.onrender.com";
 
 const handleAddToDatabase = async () => {
   if (!selectedImageFile) return alert("Please upload an image.");
@@ -63,9 +61,8 @@ const handleAddToDatabase = async () => {
       method: "POST",
       body: formData,
     });
-    
+
     const result = await response.json();
-    console.log("Backend URL:", BACKEND_URL);
 
     if (result.success) {
       alert(`✅ Data added to database! Vehicle count: ${result.count}`);
@@ -77,6 +74,7 @@ const handleAddToDatabase = async () => {
     alert("❌ Server error.");
   }
 };
+
 
   return (
     <div className="homepage">
