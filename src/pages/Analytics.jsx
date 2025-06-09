@@ -6,6 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import dayjs from 'dayjs';
 import { AreaChart, Area, Legend } from 'recharts';
 
+const BACKEND_URL = "https://smart-parking-backen-6x0c.onrender.com";
 
 const viewOptions = [
   { value: 'outdoor', label: 'Outdoor' },
@@ -66,11 +67,12 @@ const CombinedAnalyticsPage = () => {
   const [popularData, setPopularData] = useState([]);
   const [averageStay, setAverageStay] = useState(0);
   const [averageOccupancyData, setAverageOccupancyData] = useState([]);
+  
 
   useEffect(() => {
     Promise.all([
-      fetch('/popular_times_indoor.json').then(res => res.json()),
-      fetch('/popular_times_outdoor.json').then(res => res.json())
+      fetch(`${BACKEND_URL}/popular_times_indoor.json`).then(res => res.json()),
+      fetch(`${BACKEND_URL}/popular_times_outdoor.json`).then(res => res.json())
     ]).then(([indoorData, outdoorData]) => {
       const allDates = new Set([
         ...Object.keys(indoorData || {}),
@@ -92,7 +94,7 @@ const CombinedAnalyticsPage = () => {
   }, []);
   
   useEffect(() => {
-    fetch('/combined_occupancy.json')
+    fetch(`${BACKEND_URL}/combined_occupancy.json`)
       .then(res => res.json())
       .then(json => {
         const sampleDate = Object.keys(json)[0];
@@ -130,8 +132,8 @@ const CombinedAnalyticsPage = () => {
 
   useEffect(() => {
     const file = viewType === 'indoor'
-      ? '/popular_times_indoor.json'
-      : '/popular_times_outdoor.json';
+      ? `${BACKEND_URL}/popular_times_indoor.json`
+      : `${BACKEND_URL}/popular_times_outdoor.json`;
   
     fetch(file)
       .then(res => res.json())
